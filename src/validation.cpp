@@ -1168,6 +1168,10 @@ NOTE:   unlike bitcoin we are using PREVIOUS block height here,
 CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
     CAmount nSubsidy = 0;
+    if(nPrevHeight == 0){
+        return 200000 * COIN;
+    }
+
     if (IsSPKHardForkEnabled(consensusParams, nPrevHeight)) {    
         nSubsidy = GetRebornSubsidy(nPrevHeight, consensusParams);
     }
